@@ -31,5 +31,5 @@ ingress:
 
 clean:
 	helm uninstall hasura
-	kubctl delete -f hasura-jwt
+	kubectl delete -f hasura-jwt
 	$(REMOVE_HASURA)

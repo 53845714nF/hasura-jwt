@@ -6,6 +6,14 @@
   - On Linux, install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
   - Install [Helm](https://helm.sh/docs/intro/install/)
 
+And Set the following in your `etc/hosts`:
+```
+127.0.0.1   hasura.docker.internal
+127.0.0.1   nginx.local
+127.0.0.1   hasura-jwt.docker.internal
+```
+
+
 ## Deploy to Kubernetes
 
 ```bash
