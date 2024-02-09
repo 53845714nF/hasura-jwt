@@ -1,0 +1,8 @@
+version: 3
+endpoint: https://hasura.docker.internal
+admin_secret: my-secret
+insecure_skip_tls_verify: true
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000

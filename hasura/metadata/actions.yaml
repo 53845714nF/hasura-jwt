@@ -1,0 +1,22 @@
+actions:
+  - name: Login
+    definition:
+      kind: synchronous
+      handler: '{{JWT_URL}}/login'
+    permissions:
+      - role: anonymous
+    comment: Login
+  - name: Signup
+    definition:
+      kind: synchronous
+      handler: '{{JWT_URL}}/signup'
+    permissions:
+      - role: anonymous
+    comment: Signup
+custom_types:
+  enums: []
+  input_objects: []
+  objects:
+    - name: CreateUserOutput
+    - name: JsonWebToken
+  scalars: []
