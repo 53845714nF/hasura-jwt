@@ -1,6 +1,6 @@
-# Hasura JWT 🔑
+# 🔑 Hasura JWT 
 
-## Description
+## 🗒️ Description
 This app allows you to create JWTs for hasura.
 And have a minimal signup process via email.
 It is small (Image size ~10MB) tool written in golang and minimal dependencies.
@@ -14,6 +14,23 @@ It is small (Image size ~10MB) tool written in golang and minimal dependencies.
   -  📦 Easy to deploy with Docker.
 
 ## Usage
+
+### ⚙️ Deployment
+There are several ways to deploy this project.
+There is a ready-made container image on GitHub Packages. 📦
+
+You can use it in your environment.
+
+#### 🐳 Docker Compose
+There is a Docker Compose File for developers, here the Hasura must be adapted.
+
+#### ☸ Kubernetes
+There is also a template for Kubernetes.
+Here you can see how to roll out this app there.
+
+#### 🐹 Build with golang 
+And last but not least, since it is written in golang, you can export the project to almost all platforms.
+(If a platform is explicitly desired, I can create a Github action for it, let me know in an issue)
 
 ### Environment Variables for Hasura JWT
   - `HASURA_URL` - Must be set to the URL of your Hasura instance (e.g. `http://localhost:8080/v1/graphql` is also the default value for development).
@@ -30,12 +47,14 @@ It is small (Image size ~10MB) tool written in golang and minimal dependencies.
   - `JWT_URL` - Must be set to the URL of your Hasura JWT instance (e.g. `http://localhost:3000`).
   - `HASURA_GRAPHQL_UNAUTHORIZED_ROLE` - Set to `anonymous` to get access to the public schema without a token. and also for login and signup mutations.
 
-### Volume
+### 📂 Volume
   - `/etc/ssl/certs/` - You can map a volume with the certificates to `/etc/ssl/certs/` in the container.
 This helps by problems with the SMTP Authentication. In default are only lets-encrypt certificates supported.
 
+## 📃 Docs
+Please take a look at the GitHub Wiki tab there are sequence diagrams for the process (sign up, login) and a database model.
 
-## Similar Projects
+## 🤖 Similar Projects
 There is are similar project like this:
   - [Hasura Auth](https://github.com/nhost/hasura-auth/tree/main) - It offers more features but is written in Typescript.
   - [Backend-Quickstart](https://github.com/ryaino/Backend-Quickstart) - It's written in Java, but the last commit was 2 years ago.
