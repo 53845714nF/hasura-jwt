@@ -26,4 +26,4 @@ secret:
 
 extraEnvs:
   - name: JWT_URL
-    value: "https://hasura-jwt.docker.internal"
+    value: "http://hasura-jwt-service:3000"

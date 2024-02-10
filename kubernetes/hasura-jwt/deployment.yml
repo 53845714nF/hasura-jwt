@@ -18,12 +18,22 @@ spec:
         ports:
         - containerPort: 3000
         env:
+        - name: HASURA_URL
+          value: http://hasura-graphql-engine:8080/v1/graphql
         - name: JWT_KEY
           value: "this-is-a-generic-HS256-secret-key-and-you-should-really-change-it"
         - name: HASURA_SECRET
           value: "my-secret"
         - name: EMAIL_VERIFICATION
-          value: "False"
+          value: "True"
+        - name: APP_URL
+          value: "https://hasura-jwt.docker.internal"
+        - name: SMTP_HOST
+          value: mail.example.com
+        - name: SMTP_USER
+          value: user@example.com
+        - name: SMTP_PASSWORD
+          value: user_password
         resources:
           limits:
             cpu: "0.5"

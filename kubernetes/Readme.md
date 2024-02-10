@@ -6,7 +6,9 @@
   - On Linux, install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
   - Install [Helm](https://helm.sh/docs/intro/install/)
 
-And Set the following in your `etc/hosts`:
+## Local development 
+
+Set the following records in your `etc/hosts`:
 ```
 127.0.0.1   hasura.docker.internal
 127.0.0.1   nginx.local
@@ -15,16 +17,9 @@ And Set the following in your `etc/hosts`:
 
 
 ## Deploy to Kubernetes
+Use `make ingress` to install nginx ingress on your Cluster. If you don't already have it. 
 
-```bash
-helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace
-helm repo add hasura https://hasura.github.io/helm-charts
-helm repo update
-helm install hasura -f ./values.yaml hasura/graphql-engine
-```
+Use `make all` to create this app.
 
 ## Uninstall
-
-```bash
-helm uninstall hasura
-```
+Use `make clean` to delete the app from the Kubernetes Cluster.

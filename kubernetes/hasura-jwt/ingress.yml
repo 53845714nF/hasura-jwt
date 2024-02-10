@@ -3,9 +3,10 @@ kind: Ingress
 metadata:
   name: hasura-jwt-ingress
 spec:
+  ingressClassName: nginx
   rules:
   - host: hasura-jwt.docker.internal
-  - http:
+    http:
       paths:
       - path: /
         pathType: Prefix
