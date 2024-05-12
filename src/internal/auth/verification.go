@@ -42,8 +42,7 @@ func GenerateToken(name string, email string, passwordHash string) string {
 
 func VerifyHandler(w http.ResponseWriter, r *http.Request) {
 	appConfig := config.LoadConfig()
-	// Parse the URL path to get the token (everything after /verify/)
-	token := r.URL.Path[len("/verify/"):]
+	token := r.PathValue("token")
 
 	mu.Lock()
 	defer mu.Unlock()

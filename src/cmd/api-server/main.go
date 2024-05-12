@@ -14,7 +14,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/signup", auth.SignupHandler)
 	mux.HandleFunc("/login", auth.LoginHandler)
-	mux.HandleFunc("/verify/", auth.VerifyHandler)
+	mux.HandleFunc("/verify/{token}", auth.VerifyHandler)
 
 	err := http.ListenAndServe(":3000", mux)
 	log.Fatal(err)
