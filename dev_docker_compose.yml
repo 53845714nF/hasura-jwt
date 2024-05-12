@@ -37,6 +37,7 @@ services:
       JWT_KEY: 'this-is-a-generic-HS256-secret-key-and-you-should-really-change-it'
       HASURA_SECRET: 'my-secret'
       APP_URL: 'http://localhost:3000'
+      EMAIL_VERIFICATION: true
       SMTP_HOST: 'mail.example.com'
       SMTP_PORT: '587'
       SMTP_USER: 'user@example.com'
