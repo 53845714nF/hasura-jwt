@@ -14,11 +14,6 @@ repos:
       hooks:
           - id: markdownlint
 
-    - repo: https://github.com/psf/black
-      rev: 22.10.0
-      hooks:
-          - id: black
-
     - repo: https://github.com/Agilicus/pre-commit-hook-k8svalidate.git
       rev: v0.2.0
       hooks:
