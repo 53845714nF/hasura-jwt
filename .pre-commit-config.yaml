@@ -1,0 +1,89 @@
+---
+repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v2.3.0
+      hooks:
+          - id: check-yaml
+          - id: end-of-file-fixer
+          - id: trailing-whitespace
+          - id: check-merge-conflict
+          - id: check-added-large-files
+
+    - repo: https://github.com/igorshubovych/markdownlint-cli
+      rev: v0.41.0
+      hooks:
+          - id: markdownlint
+
+    - repo: https://github.com/Agilicus/pre-commit-hook-k8svalidate.git
+      rev: v0.2.0
+      hooks:
+          - id: k8svalidate
+            args: [--exclude, '**/*.patch.yaml']
+            files: .yml$
+
+    - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+      rev: 0.2.1 # or other specific tag
+      hooks:
+          - id: yamlfmt
+
+    - repo: https://github.com/tekwizely/pre-commit-golang
+      rev: master
+      hooks:
+          - id: go-build-mod
+          - id: go-build-pkg
+          - id: go-build-repo-mod
+          - id: go-build-repo-pkg
+          - id: go-mod-tidy
+          - id: go-mod-tidy-repo
+          - id: go-sec-mod
+          - id: go-sec-pkg
+          - id: go-sec-repo-mod
+          - id: go-sec-repo-pkg
+          - id: go-staticcheck-mod
+          - id: go-staticcheck-pkg
+          - id: go-staticcheck-repo-mod
+          - id: go-staticcheck-repo-pkg
+          - id: go-structslop-mod
+          - id: go-structslop-pkg
+          - id: go-structslop-repo-mod
+          - id: go-structslop-repo-pkg
+          - id: go-fmt
+          - id: go-fmt-repo
+          - id: go-fumpt        # replaces go-fmt
+          - id: go-fumpt-repo   # replaces go-fmt-repo
+          - id: go-imports      # replaces go-fmt
+          - id: go-imports-repo # replaces go-fmt-repo
+          - id: go-returns      # replaces go-imports & go-fmt
+          - id: go-returns-repo # replaces go-imports-repo & go-fmt-repo
+          #
+          # Style Checkers
+          #
+          - id: go-lint
+          - id: go-critic
+        #
+        # GolangCI-Lint
+        # - Fast Multi-Linter
+        # - Can be configured to replace MOST other hooks
+        # - Supports repo config file for configuration
+        # - https://github.com/golangci/golangci-lint
+        #
+          - id: golangci-lint
+          - id: golangci-lint-mod
+          - id: golangci-lint-pkg
+          - id: golangci-lint-repo-mod
+          - id: golangci-lint-repo-pkg
+        #
+        # Invoking Custom Go Tools
+        # - Configured *entirely* through the `args` attribute, ie:
+        #   args: [ go, test, ./... ]
+        # - Use arg `--hook:error-on-output` to indicate that any output from the tool
+        #   should be treated as an error.
+        # - Use the `name` attribute to provide better messaging when the hook runs
+        # - Use the `alias` attribute to be able to invoke your hook via `pre-commit run`
+        #
+          - id: my-cmd
+          - id: my-cmd-mod
+          - id: my-cmd-pkg
+          - id: my-cmd-repo
+          - id: my-cmd-repo-mod
+          - id: my-cmd-repo-pkg
