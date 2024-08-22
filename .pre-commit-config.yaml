@@ -21,11 +21,6 @@ repos:
             args: [--exclude, '**/*.patch.yaml']
             files: .yml$
 
-    - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-      rev: 0.2.1 # or other specific tag
-      hooks:
-          - id: yamlfmt
-
     - repo: https://github.com/tekwizely/pre-commit-golang
       rev: master
       hooks:
