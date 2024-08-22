@@ -49,10 +49,10 @@ And last but not least, since it is written in golang, you can export the projec
 
 ### 📂 Volume
   - `/etc/ssl/certs/` - You can map a volume with the certificates to `/etc/ssl/certs/` in the container.
-This helps by problems with the SMTP Authentication. In default are only lets-encrypt certificates supported.
+This helps by problems with the SMTP Authentication. Certificates from the Alpine package `ca-certificates` are supported by default.
 
 ## 📃 Docs
-Please take a look at the GitHub Wiki tab there are sequence diagrams for the process (sign up, login) and a database model.
+Please take a look at the GitHub [Wiki](https://github.com/53845714nF/hasura-jwt/wiki) tab there are sequence diagrams for the process (sign up, login) and a database model.
 
 ## 🤖 Similar Projects
 There is are similar project like this:
