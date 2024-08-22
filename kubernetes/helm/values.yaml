@@ -1,29 +1,30 @@
+---
 ingress:
-  enabled: true
-  hostName: "hasura.docker.internal"
-  ingressClassName: "nginx"
-  annotations: {}
+    enabled: true
+    hostName: hasura.docker.internal
+    ingressClassName: nginx
+    annotations: {}
 
 postgres:
-  enabled: true
-
-  auth:
-    username: postgres
-    password: postgrespassword
-    database: public
-
-  persistence:
     enabled: true
-    size: 1Gi
+
+    auth:
+        username: postgres
+        password: postgrespassword
+        database: public
+
+    persistence:
+        enabled: true
+        size: 1Gi
 
 secret:
-  adminSecret: "my-secret"
-  jwtSecret: {"type": "HS256", "key": "this-is-a-generic-HS256-secret-key-and-you-should-really-change-it"}
-  unauthorizedRole: "anonymous"
+    adminSecret: my-secret
+    jwtSecret: {type: HS256, key: this-is-a-generic-HS256-secret-key-and-you-should-really-change-it}
+    unauthorizedRole: anonymous
 
-  extraSecrets:
-    DATA_DATABASE_URL: postgres://postgres:postgrespassword@hasura-postgres:5432/public
+    extraSecrets:
+        DATA_DATABASE_URL: postgres://postgres:postgrespassword@hasura-postgres:5432/public
 
 extraEnvs:
-  - name: JWT_URL
-    value: "http://hasura-jwt-service:3000"
+    - name: JWT_URL
+      value: http://hasura-jwt-service:3000
