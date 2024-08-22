@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    name: Build
+    name: Scan Image
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
@@ -24,6 +24,6 @@ jobs:
           output: 'trivy-results.sarif'
 
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
