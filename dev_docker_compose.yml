@@ -1,48 +1,48 @@
-version: "3.11"
+---
 
 services:
-  postgres:
-    image: postgres
-    restart: no
-    ports:
-        - "5432:5432"
-    volumes:
-      - hasura_ci_db_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: postgrespassword
+    postgres:
+        image: postgres
+        restart: no
+        ports:
+            - 5432:5432
+        volumes:
+            - hasura_ci_db_data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_PASSWORD: postgrespassword
 
-  graphql-engine:
-    image: hasura/graphql-engine:v2.36.1
-    restart: no
-    ports:
-      - "8080:8080"
-    depends_on:
-      - "postgres"
-    environment:
-      HASURA_GRAPHQL_DATABASE_URL: "postgres://postgres:postgrespassword@postgres:5432/postgres"
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
-      HASURA_GRAPHQL_ADMIN_SECRET: "my-secret"
-      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "this-is-a-generic-HS256-secret-key-and-you-should-really-change-it" }'
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "anonymous"
-      JWT_URL: 'http://hasura-jwt:3000'
+    graphql-engine:
+        image: hasura/graphql-engine:v2.36.1
+        restart: no
+        ports:
+            - 8080:8080
+        depends_on:
+            - postgres
+        environment:
+            HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+            HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+            HASURA_GRAPHQL_ADMIN_SECRET: my-secret
+            HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "this-is-a-generic-HS256-secret-key-and-you-should-really-change-it" }'
+            HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
+            JWT_URL: http://hasura-jwt:3000
 
-  hasura-jwt:
-    build:
-      context: ./src
-      dockerfile: Dockerfile
-    restart: no
-    ports:
-        - "3000:3000"
-    environment:
-      JWT_KEY: 'this-is-a-generic-HS256-secret-key-and-you-should-really-change-it'
-      HASURA_SECRET: 'my-secret'
-      APP_URL: 'http://localhost:3000'
-      EMAIL_VERIFICATION: true
-      SMTP_HOST: 'mail.example.com'
-      SMTP_PORT: '587'
-      SMTP_USER: 'user@example.com'
-      SMTP_PASSWORD: 'user_password'
+    hasura-jwt:
+        build:
+            context: ./src
+            dockerfile: Dockerfile
+        restart: no
+        ports:
+            - 3000:3000
+        environment:
+            JWT_KEY: this-is-a-generic-HS256-secret-key-and-you-should-really-change-it
+            HASURA_SECRET: my-secret
+            APP_URL: http://localhost:3000
+            EMAIL_VERIFICATION: true
+            SMTP_HOST: mail.example.com
+            SMTP_PORT: '587'
+            SMTP_USER: user@example.com
+            SMTP_PASSWORD: user_password
 
 
 volumes:
-  hasura_ci_db_data:
+    hasura_ci_db_data:

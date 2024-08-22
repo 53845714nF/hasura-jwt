@@ -1,43 +1,44 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hasura-jwt-deployment
+    name: hasura-jwt-deployment
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: hasura-jwt
-  template:
-    metadata:
-      labels:
-        app: hasura-jwt
-    spec:
-      containers:
-      - name: hasura-jwt-container
-        image: ghcr.io/53845714nf/hasura-jwt/hasura-jwt:latest
-        ports:
-        - containerPort: 3000
-        env:
-        - name: HASURA_URL
-          value: http://hasura-graphql-engine:8080/v1/graphql
-        - name: JWT_KEY
-          value: "this-is-a-generic-HS256-secret-key-and-you-should-really-change-it"
-        - name: HASURA_SECRET
-          value: "my-secret"
-        - name: EMAIL_VERIFICATION
-          value: "True"
-        - name: APP_URL
-          value: "https://hasura-jwt.docker.internal"
-        - name: SMTP_HOST
-          value: mail.example.com
-        - name: SMTP_USER
-          value: user@example.com
-        - name: SMTP_PASSWORD
-          value: user_password
-        resources:
-          limits:
-            cpu: "0.5"
-            memory: "512Mi"
-          requests:
-            cpu: "0.25"
-            memory: "256Mi"
+    replicas: 1
+    selector:
+        matchLabels:
+            app: hasura-jwt
+    template:
+        metadata:
+            labels:
+                app: hasura-jwt
+        spec:
+            containers:
+                - name: hasura-jwt-container
+                  image: ghcr.io/53845714nf/hasura-jwt/hasura-jwt:latest
+                  ports:
+                      - containerPort: 3000
+                  env:
+                      - name: HASURA_URL
+                        value: http://hasura-graphql-engine:8080/v1/graphql
+                      - name: JWT_KEY
+                        value: this-is-a-generic-HS256-secret-key-and-you-should-really-change-it
+                      - name: HASURA_SECRET
+                        value: my-secret
+                      - name: EMAIL_VERIFICATION
+                        value: 'True'
+                      - name: APP_URL
+                        value: https://hasura-jwt.docker.internal
+                      - name: SMTP_HOST
+                        value: mail.example.com
+                      - name: SMTP_USER
+                        value: user@example.com
+                      - name: SMTP_PASSWORD
+                        value: user_password
+                  resources:
+                      limits:
+                          cpu: '0.5'
+                          memory: 512Mi
+                      requests:
+                          cpu: '0.25'
+                          memory: 256Mi
