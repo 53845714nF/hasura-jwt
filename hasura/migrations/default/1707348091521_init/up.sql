@@ -2,7 +2,7 @@ SET check_function_bodies = false;
 CREATE FUNCTION public.create_assigned_user_role() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
-BEGIN 
+BEGIN
     INSERT INTO assigned_user_roles (user_id, user_role_name)
     VALUES (NEW.id, 'user');
     RETURN NEW;
