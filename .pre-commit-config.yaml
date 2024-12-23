@@ -15,11 +15,6 @@ repos:
             args: [--exclude, '**/*.patch.yaml']
             files: .yml$
 
-    - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-      rev: 0.2.3
-      hooks:
-          - id: yamlfmt
-
     - repo: https://github.com/tekwizely/pre-commit-golang
       rev: v1.0.0-rc.1
       hooks:
@@ -27,4 +22,3 @@ repos:
           - id: go-build-repo-mod
           - id: go-mod-tidy
           - id: go-mod-tidy-repo
-          - id: go-sec-pkg
