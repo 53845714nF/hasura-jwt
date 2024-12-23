@@ -1,17 +1,18 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hasura-jwt-ingress
+    name: hasura-jwt-ingress
 spec:
-  ingressClassName: nginx
-  rules:
-  - host: hasura-jwt.docker.internal
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: hasura-jwt-service
-            port:
-              number: 3000
+    ingressClassName: nginx
+    rules:
+        - host: hasura-jwt.docker.internal
+          http:
+              paths:
+                  - path: /
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: hasura-jwt-service
+                            port:
+                                number: 3000

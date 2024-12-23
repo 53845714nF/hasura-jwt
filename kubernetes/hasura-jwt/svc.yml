@@ -1,13 +1,13 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hasura-jwt-service
+    name: hasura-jwt-service
 spec:
-  type: ClusterIP
-  selector:
-    app: hasura-jwt
-  ports:
-    - protocol: TCP
-      port: 3000
-      targetPort: 3000
-  
+    type: ClusterIP
+    selector:
+        app: hasura-jwt
+    ports:
+        - protocol: TCP
+          port: 3000
+          targetPort: 3000
