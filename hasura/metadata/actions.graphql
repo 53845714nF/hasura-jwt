@@ -20,4 +20,3 @@ type CreateUserOutput {
 type JsonWebToken {
   Token: String!
 }
-
