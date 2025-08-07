@@ -7,7 +7,7 @@ To maintain a welcoming and collaborative environment, please review and follow 
 
 There are two ways you can contribute to this project:
 
-1. Reporting Bugs: If you encounter any issues or bugs while using the packer template, please open an issue on the repository's issue tracker.
+1. Reporting Bugs: If you encounter any issues or bugs while using hasura-jwt, please open an issue on the repository's issue tracker.
 2. Submitting Pull Requests: If you would like to contribute code or fixes, you can submit a pull request. Please make sure to follow the guidelines below.
 
 ## Pull Request Guidelines
