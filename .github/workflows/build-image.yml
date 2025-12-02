@@ -1,5 +1,8 @@
 ---
 name: Create container image for hasura-jwt
+permissions:
+  contents: read
+  packages: write
 
 on:
     push:
