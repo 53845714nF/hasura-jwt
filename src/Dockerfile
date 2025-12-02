@@ -1,4 +1,4 @@
-FROM golang:1.23.0-alpine3.20 AS builder
+FROM golang:1.24.0-alpine3.20 AS builder
 ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
 
 RUN apk --no-cache add ca-certificates
