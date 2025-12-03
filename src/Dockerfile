@@ -1,4 +1,4 @@
-FROM golang:1.25.4 AS builder
+FROM golang:1.25.4-alpine3.21 AS builder
 ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
 
 RUN apk --no-cache add ca-certificates
@@ -8,7 +8,7 @@ COPY . .
 
 RUN go mod download
 
-RUN go build -tags=json_v2 -o hasura-jwt ./cmd/api-server
+RUN go build -o hasura-jwt ./cmd/api-server
 
 FROM scratch
 
