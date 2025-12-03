@@ -3,13 +3,14 @@ package auth
 import (
 	"encoding/json"
 	"fmt"
-	"golang.org/x/crypto/bcrypt"
 	"hasura-jwt/internal/config"
 	"hasura-jwt/internal/email"
 	"hasura-jwt/internal/graphql"
 	"hasura-jwt/internal/model"
 	"io"
 	"net/http"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
