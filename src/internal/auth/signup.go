@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"encoding/json/v2"
+	"encoding/json"
 	"fmt"
 	"hasura-jwt/internal/config"
 	"hasura-jwt/internal/email"
