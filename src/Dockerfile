@@ -19,4 +19,6 @@ WORKDIR /app
 COPY --from=builder /app/hasura-jwt hasura-jwt
 
 EXPOSE 3000
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+  CMD ["./hasura-jwt", "healthcheck"]
 ENTRYPOINT ["./hasura-jwt"]
