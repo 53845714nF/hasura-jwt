@@ -1,0 +1,44 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/53845714nf/hasura-jwt/hasura-jwt
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+env:
+  HASURA_URL: "http://hasura-graphql-engine:8080/v1/graphql"
+  JWT_KEY: "this-is-a-generic-HS256-secret-key-and-you-should-really-change-it"
+  HASURA_SECRET: "my-secret"
+  EMAIL_VERIFICATION: "True"
+  APP_URL: "https://hasura-jwt.docker.internal"
+  SMTP_HOST: "mail.example.com"
+  SMTP_USER: "user@example.com"
+  SMTP_PASSWORD: "user_password"
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations: {}
+  hosts:
+    - host: hasura-jwt.docker.internal
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  limits:
+    cpu: "0.5"
+    memory: "512Mi"
+  requests:
+    cpu: "0.25"
+    memory: "256Mi"
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

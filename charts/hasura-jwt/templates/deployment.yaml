@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hasura-jwt.fullname" . }}-deployment
+  labels:
+    {{- include "hasura-jwt.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "hasura-jwt.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "hasura-jwt.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-container
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: HASURA_URL
+              value: {{ .Values.env.HASURA_URL | quote }}
+            - name: JWT_KEY
+              value: {{ .Values.env.JWT_KEY | quote }}
+            - name: HASURA_SECRET
+              value: {{ .Values.env.HASURA_SECRET | quote }}
+            - name: EMAIL_VERIFICATION
+              value: {{ .Values.env.EMAIL_VERIFICATION | quote }}
+            - name: APP_URL
+              value: {{ .Values.env.APP_URL | quote }}
+            - name: SMTP_HOST
+              value: {{ .Values.env.SMTP_HOST | quote }}
+            - name: SMTP_USER
+              value: {{ .Values.env.SMTP_USER | quote }}
+            - name: SMTP_PASSWORD
+              value: {{ .Values.env.SMTP_PASSWORD | quote }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

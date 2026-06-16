@@ -24,12 +24,12 @@ all:
 	$(HASURA_METADATA)
 	$(HASURA_MIGRATE)
 	$(HASURA_SEED)
-	kubectl apply -f hasura-jwt
+	helm upgrade --install hasura-jwt ../charts/hasura-jwt
 
 ingress:
 	helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace
 
 clean:
 	helm uninstall hasura
-	kubectl delete -f hasura-jwt
+	helm uninstall hasura-jwt
 	$(REMOVE_HASURA)
