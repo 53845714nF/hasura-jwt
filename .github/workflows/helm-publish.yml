@@ -36,5 +36,5 @@ jobs:
       - name: Push Helm chart to GHCR
         run: |
           CHART_PACKAGE=$(ls /tmp/helm-charts/hasura-jwt-*.tgz)
-          REPO=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
-          helm push "$CHART_PACKAGE" oci://${{ env.REGISTRY }}/$REPO
+          REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          helm push "$CHART_PACKAGE" oci://${{ env.REGISTRY }}/$REPO_OWNER/charts
