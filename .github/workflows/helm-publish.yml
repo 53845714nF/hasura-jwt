@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "charts/hasura-jwt/**"
+  workflow_dispatch:
+  pull_request:
 
 env:
   REGISTRY: ghcr.io
