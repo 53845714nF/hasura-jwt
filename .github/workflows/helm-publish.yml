@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'charts/hasura-jwt/**'
+      - "charts/hasura-jwt/**"
 
 env:
   REGISTRY: ghcr.io
@@ -18,13 +18,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install Helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@v5
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
