@@ -71,7 +71,8 @@ func Signup(args model.SignupArgs) (response model.CreateUserOutput, err error) 
 	// Hash the password
 	passwordHash, err := bcrypt.GenerateFromPassword([]byte(args.Password), bcrypt.DefaultCost)
 	if err != nil {
-		fmt.Printf("Error when hashing the password: %s", err)
+		fmt.Printf("Error when hashing the password: %s\n", err)
+		return model.CreateUserOutput{}, fmt.Errorf("failed to hash password")
 	}
 
 	var status string
@@ -89,7 +90,11 @@ func Signup(args model.SignupArgs) (response model.CreateUserOutput, err error) 
 		status = "Verification email sent"
 	} else {
 		// Create User in Hasura
-		graphql.CreateUserMutation(appConfig.HasuraURL, appConfig.HasuraSecret, args.Name, args.Email, string(passwordHash))
+		err = graphql.CreateUserMutation(appConfig.HasuraURL, appConfig.HasuraSecret, args.Name, args.Email, string(passwordHash))
+		if err != nil {
+			fmt.Printf("Error when creating user in Hasura: %s\n", err)
+			return model.CreateUserOutput{}, fmt.Errorf("failed to create user: %w", err)
+		}
 		status = "User created"
 	}
 

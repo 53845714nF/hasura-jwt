@@ -16,7 +16,6 @@ func SendVerifyMail(recipients string, token string) error {
 
 	// Create the verification link
 	verificationLink := fmt.Sprintf("%s/verify/%s", appConfig.AppURL, token)
-	fmt.Println("Verification link:", verificationLink)
 
 	// Create the verification message
 	message := []byte("To: " + recipients + "\r\n" +

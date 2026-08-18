@@ -55,7 +55,11 @@ func VerifyHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Create the user in the database
-	graphql.CreateUserMutation(appConfig.HasuraURL, appConfig.HasuraSecret, verificationData.Name, verificationData.Email, verificationData.PasswordHash)
+	err := graphql.CreateUserMutation(appConfig.HasuraURL, appConfig.HasuraSecret, verificationData.Name, verificationData.Email, verificationData.PasswordHash)
+	if err != nil {
+		http.Error(w, "failed to create user", http.StatusInternalServerError)
+		return
+	}
 
 	delete(UserTokens, token)
 

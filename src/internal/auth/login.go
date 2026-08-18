@@ -87,10 +87,15 @@ func Login(args model.LoginArgs) (response model.JsonWebToken, err error) {
 		HasuraClaims map[string]interface{} `json:"https://hasura.io/jwt/claims"`
 	}
 
+	defaultRole := "user"
+	if len(userRole) > 0 {
+		defaultRole = userRole[0]
+	}
+
 	claims := YourClaimStruct{
 		HasuraClaims: map[string]interface{}{
 			"x-hasura-allowed-roles": userRole,
-			"x-hasura-default-role":  "anonymous",
+			"x-hasura-default-role":  defaultRole,
 			"x-hasura-user-id":       id,
 		},
 	}
@@ -98,6 +103,7 @@ func Login(args model.LoginArgs) (response model.JsonWebToken, err error) {
 	token = jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub":                          id,
 		"iat":                          currentTime,
+		"exp":                          currentTime + (24 * 3600),
 		"https://hasura.io/jwt/claims": claims.HasuraClaims,
 	})
 

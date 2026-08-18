@@ -9,7 +9,7 @@ import (
 )
 
 // CreateUserMutation send an GraphQl-Mutation to create a user
-func CreateUserMutation(graphqlURL string, secret string, name string, email string, password string) {
+func CreateUserMutation(graphqlURL string, secret string, name string, email string, password string) error {
 
 	query := `
 		mutation CreateUser($name: String!, $email: String!, $password: String!) {
@@ -32,14 +32,12 @@ func CreateUserMutation(graphqlURL string, secret string, name string, email str
 		"variables": variables,
 	})
 	if err != nil {
-		fmt.Println(" failed to create GraphQL-Mutation:", err)
-		return
+		return fmt.Errorf("failed to create GraphQL mutation payload: %w", err)
 	}
 
 	req, err := http.NewRequest("POST", graphqlURL, bytes.NewBuffer(requestBody))
 	if err != nil {
-		fmt.Println("failed to create to HTTP-Request object:", err)
-		return
+		return fmt.Errorf("failed to create HTTP request object: %w", err)
 	}
 
 	req.Header.Set("Content-Type", "application/json")
@@ -47,8 +45,7 @@ func CreateUserMutation(graphqlURL string, secret string, name string, email str
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		fmt.Println("failed to send GraphQl-Query", err)
-		return
+		return fmt.Errorf("failed to send GraphQL query: %w", err)
 	}
 	defer func(Body io.ReadCloser) {
 		err := Body.Close()
@@ -61,10 +58,12 @@ func CreateUserMutation(graphqlURL string, secret string, name string, email str
 	var result map[string]interface{}
 	err = json.NewDecoder(resp.Body).Decode(&result)
 	if err != nil {
-		fmt.Println("failed to read GraphQl-Response", err)
-		return
+		return fmt.Errorf("failed to read GraphQL response: %w", err)
 	}
 
-	// Show the result
-	fmt.Printf("Created User: %s\n", result)
+	if errs, exists := result["errors"]; exists {
+		return fmt.Errorf("GraphQL error: %v", errs)
+	}
+
+	return nil
 }
