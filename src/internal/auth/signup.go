@@ -6,11 +6,14 @@ import (
 	"hasura-jwt/internal/config"
 	"hasura-jwt/internal/email"
 	"hasura-jwt/internal/graphql"
+	"hasura-jwt/internal/middleware"
 	"hasura-jwt/internal/model"
 	"io"
 	"net/http"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
+	"golang.org/x/time/rate"
 )
 
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,8 +55,14 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+var signupLimiter = middleware.NewKeyRateLimiter(rate.Every(10*time.Second), 3)
+
 // Signup function that takes the Action parameters and must return its response type
 func Signup(args model.SignupArgs) (response model.CreateUserOutput, err error) {
+
+	if !signupLimiter.Allow(args.Email) {
+		return model.CreateUserOutput{}, fmt.Errorf("too many signup attempts for this email. Please try again later.")
+	}
 
 	appConfig := config.LoadConfig()
 

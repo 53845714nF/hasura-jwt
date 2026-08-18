@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"hasura-jwt/internal/config"
 	"hasura-jwt/internal/graphql"
+	"hasura-jwt/internal/middleware"
 	"hasura-jwt/internal/model"
 	"io"
 	"net/http"
@@ -12,6 +13,7 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
+	"golang.org/x/time/rate"
 )
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,8 +54,14 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+var loginLimiter = middleware.NewKeyRateLimiter(rate.Every(3*time.Second), 5)
+
 // Login Auto-generated function that takes the Action parameters and must return it is response type
 func Login(args model.LoginArgs) (response model.JsonWebToken, err error) {
+
+	if !loginLimiter.Allow(args.Email) {
+		return model.JsonWebToken{}, fmt.Errorf("too many login attempts. Please try again later.")
+	}
 
 	appConfig := config.LoadConfig()
 	currentTime := time.Now().Unix()
