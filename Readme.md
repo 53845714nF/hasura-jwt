@@ -6,34 +6,58 @@ This app allows you to create JWTs for hasura.
 And have a minimal signup process via email.
 It is small (Image size ~10MB) tool written in golang and minimal dependencies.
 
-## Features
+## 💡 Features
 
 - 🧑‍🤝‍🧑 Users are stored in Postgres and accessed via GraphQL
 - ✨ Integrates with GraphQL and Hasura Permissions
 - 🔑 JWT tokens.
 - ✉️ Emails sent via SMTP.
 - 👨‍💻 Written 100% in Golang.
-- 📦 Easy to deploy with Docker.
+- 📦 Easy to deploy with Docker or Helm.
 
-## Usage
-
-### ⚙️ Deployment
+## ⚙️ Usage
 
 There are several ways to deploy this project.
 There is a ready-made container image on GitHub Packages. 📦
 
 You can use it in your environment.
 
-#### 🐳 Docker Compose
+### Kubernetes
+
+There is also a Helmcahart for Kubernetes available.
+
+For example: 
+```yaml
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+spec:
+  chart: oci://ghcr.io/53845714nf/charts/hasura-jwt
+  version: 0.1.1
+  valuesContent: |-
+    env:
+      APP_URL: "https://your-jwt-app-url"
+      HASURA_URL: "https://your-hasura-url"
+      HASURA_SECRET:
+        valueFrom:
+          secretKeyRef:
+            name: hasura-secrets
+            key: admin-secret
+      JWT_KEY:
+        valueFrom:
+          secretKeyRef:
+            name: hasura-secrets
+            key: jwt-secret
+      EMAIL_VERIFICATION: false
+    ingress:
+      enabled: false
+```
+
+### Docker Compose
 
 There is a Docker Compose File for developers, here the Hasura must be adapted.
 
-#### ☸ Kubernetes
 
-There is also a template for Kubernetes.
-Here you can see how to roll out this app there.
-
-#### 🐹 Build with golang
+### Golang
 
 And last but not least, since it is written in golang,
 you can export the project to almost all platforms.
@@ -65,7 +89,7 @@ you can export the project to almost all platforms.
 - `HASURA_GRAPHQL_UNAUTHORIZED_ROLE` - Set to `anonymous` to get access to the
   public schema without a token, and also for login and signup mutations.
 
-### 📂 Volume
+### Volume
 
 You can map a volume with the certificates to `/etc/ssl/certs/` in the container.
 This helps by problems with the SMTP Authentication. Certificates from the
@@ -80,10 +104,9 @@ tab there are sequence diagrams for the process (sign up, login) and a database 
 
 There is are similar project like this:
 
-- [Hasura Auth](https://github.com/nhost/hasura-auth/tree/main) - It
-offers more features but is written in Typescript.
+- [Hasura Auth](https://github.com/nhost/hasura-auth/tree/main) - It is now deprecated.
 - [Backend-Quickstart](https://github.com/ryaino/Backend-Quickstart) -
-It's written in Java, but the last commit was 2 years ago.
+It's written in Java, but the last commit was 4 years ago.
 - [Hasura Docs](https://hasura.io/docs/latest/actions/codegen/python-flask/) -
   It's a Blog post from official Hasura Documentation,
   there is described how to create JWT with Python and Flask.
