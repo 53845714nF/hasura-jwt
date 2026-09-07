@@ -2,5 +2,5 @@ apiVersion: v2
 name: hasura-jwt
 description: A Helm chart for hasura-jwt based on the original static Kubernetes manifests
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "latest"
