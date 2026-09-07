@@ -23,69 +23,14 @@ spec:
               containerPort: 3000
               protocol: TCP
           env:
-            - name: HASURA_URL
-              {{- if kindIs "map" .Values.env.HASURA_URL }}
-              valueFrom:
-                {{- toYaml .Values.env.HASURA_URL | nindent 16 }}
+            {{- range $name, $value := .Values.env }}
+            - name: {{ $name }}
+              {{- if kindIs "map" $value }}
+              {{- toYaml $value | nindent 14 }}
               {{- else }}
-              value: {{ .Values.env.HASURA_URL | quote }}
+              value: {{ $value | quote }}
               {{- end }}
-
-            - name: JWT_KEY
-              {{- if kindIs "map" .Values.env.JWT_KEY }}
-              valueFrom:
-                {{- toYaml .Values.env.JWT_KEY | nindent 16 }}
-              {{- else }}
-              value: {{ .Values.env.JWT_KEY | quote }}
-              {{- end }}
-
-            - name: HASURA_SECRET
-              {{- if kindIs "map" .Values.env.HASURA_SECRET }}
-              valueFrom:
-                {{- toYaml .Values.env.HASURA_SECRET | nindent 16 }}
-              {{- else }}
-              value: {{ .Values.env.HASURA_SECRET | quote }}
-              {{- end }}
-
-            - name: EMAIL_VERIFICATION
-              {{- if kindIs "map" .Values.env.EMAIL_VERIFICATION }}
-              valueFrom:
-                {{- toYaml .Values.env.EMAIL_VERIFICATION | nindent 16 }}
-              {{- else }}
-              value: {{ .Values.env.EMAIL_VERIFICATION | quote }}
-              {{- end }}
-
-            - name: APP_URL
-              {{- if kindIs "map" .Values.env.APP_URL }}
-              valueFrom:
-                {{- toYaml .Values.env.APP_URL | nindent 16 }}
-              {{- else }}
-              value: {{ .Values.env.APP_URL | quote }}
-              {{- end }}
-
-            - name: SMTP_HOST
-              {{- if kindIs "map" .Values.env.SMTP_HOST }}
-              valueFrom:
-                {{- toYaml .Values.env.SMTP_HOST | nindent 16 }}
-              {{- else }}
-              value: {{ .Values.env.SMTP_HOST | quote }}
-              {{- end }}
-
-            - name: SMTP_USER
-              {{- if kindIs "map" .Values.env.SMTP_USER }}
-              valueFrom:
-                {{- toYaml .Values.env.SMTP_USER | nindent 16 }}
-              {{- else }}
-              value: {{ .Values.env.SMTP_USER | quote }}
-              {{- end }}
-
-            - name: SMTP_PASSWORD
-              {{- if kindIs "map" .Values.env.SMTP_PASSWORD }}
-              valueFrom:
-                {{- toYaml .Values.env.SMTP_PASSWORD | nindent 16 }}
-              {{- else }}
-              value: {{ .Values.env.SMTP_PASSWORD | quote }}
-              {{- end }}
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
