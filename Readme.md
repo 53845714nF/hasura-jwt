@@ -26,7 +26,7 @@ You can use it in your environment.
 
 There is also a Helmcahart for Kubernetes available.
 
-For example: 
+For example:
 ```yaml
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
