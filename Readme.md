@@ -32,7 +32,7 @@ apiVersion: helm.cattle.io/v1
 kind: HelmChart
 spec:
   chart: oci://ghcr.io/53845714nf/charts/hasura-jwt
-  version: 0.1.1
+  version: 0.1.2
   valuesContent: |-
     env:
       APP_URL: "https://your-jwt-app-url"
