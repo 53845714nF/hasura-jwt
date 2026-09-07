@@ -45,8 +45,8 @@ spec:
       JWT_KEY:
         valueFrom:
           secretKeyRef:
-            name: hasura-secrets
-            key: jwt-secret
+            name: hasura-jwt-secret
+            key: jwt-key
       EMAIL_VERIFICATION: false
     ingress:
       enabled: false
