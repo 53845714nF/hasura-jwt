@@ -1,19 +1,28 @@
-# 🔑 Hasura JWT
+<h1 align="center"> 🔑 Hasura JWT </h1>
 
-## 🗒️ Description
+<p align="center" style="padding: 5pt;">
+    <img alt="Static Badge" src="https://img.shields.io/badge/License-GPL3.0-green" alt="License">
+    <a href="https://github.com/53845714nF/hasura-jwt/actions/workflows/build-image.yml">
+    <img src="https://github.com/53845714nF/hasura-jwt/actions/workflows/build-image.yml/badge.svg" alt="Container image for hasura-jwt" style="margin-left: 0.2em;">
+    </a>
+    <a href="https://github.com/53845714nF/hasura-jwt/actions/workflows/helm-publish.yml">
+    <img src="https://github.com/53845714nF/hasura-jwt/actions/workflows/helm-publish.yml/badge.svg" alt="Helm Chart badge" style="margin-left: 0.2em;">
+    </a>
+</p>
 
-This app allows you to create JWTs for hasura.
-And have a minimal signup process via email.
-It is small (Image size ~10MB) tool written in golang and minimal dependencies.
+<p align="center">
+  Simplify your <a href="https://hasura.io/ddn">Hasura</a> authentication. 
+  This microservice handles JWT generation and offers an optional, minimal email signup process right out of the box.
+  Designed with zero bloat in mind, it features minimal dependencies and a tiny ~10MB footprint, making it fast to pull and deploy.
+</p>
 
 ## 💡 Features
 
 - 🧑‍🤝‍🧑 Users are stored in Postgres and accessed via GraphQL
 - ✨ Integrates with GraphQL and Hasura Permissions
-- 🔑 JWT tokens.
-- ✉️ Emails sent via SMTP.
-- 👨‍💻 Written 100% in Golang.
-- 📦 Easy to deploy with Docker or Helm.
+- 🔑 JWT tokens
+- ✉️ Emails sent via SMTP
+- 📦 Easy to deploy with Docker or Helm
 
 ## ⚙️ Usage
 
