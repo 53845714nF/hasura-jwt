@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  Simplify your <a href="https://hasura.io/ddn">Hasura</a> authentication. 
+  Simplify your <a href="https://hasura.io/ddn">Hasura</a> authentication.
   This microservice handles JWT generation and offers an optional, minimal email signup process right out of the box.
   Designed with zero bloat in mind, it features minimal dependencies and a tiny ~10MB footprint, making it fast to pull and deploy.
 </p>
