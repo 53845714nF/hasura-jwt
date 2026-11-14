@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/53845714nf/hasura-jwt/hasura-jwt
+  repository: ghcr.io/53845714nf/hasura-jwt:latest
   pullPolicy: IfNotPresent
   tag: "latest"
 
